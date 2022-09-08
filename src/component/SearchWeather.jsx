@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import { Button,Grid } from 'semantic-ui-react';
+import {Card, Form, Grid, Icon, Image} from 'semantic-ui-react';
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
 
 class SearchWeather extends Component {
     render() {
@@ -12,7 +14,7 @@ class SearchWeather extends Component {
                         <div className="card-img-overlay">
                             <form>
                                 <div className="input-group mb-3">
-                                    <input type="text" className="form-control" placeholder="Recipient's username"
+                                    <input type="text" className="form-control" placeholder="Search City Here"
                                            aria-label="Recipient's username" aria-describedby="basic-addon2">
                                     </input>
                                     <button type={"submit"} className={"input-group-text"} id="basic-addon2">
@@ -20,12 +22,31 @@ class SearchWeather extends Component {
                                     </button>
                                 </div>
                             </form>
-                            <div className={"bg-dark bg-opacity-50 py-3"}>
-                                <h5 className="card-title">Card title</h5>
-                                <p className="card-text">This is a wider card with supporting text below as a
-                                    natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p className="card-text">Last updated 3 mins ago</p>
-                            </div>
+                            <Card className={"lead"} style={{background:"transparent", color:"white", marginLeft:"6.5vw"}}>
+                                <i className={"mt-5 fas fa-cloud-sun fa-4x"}/>
+                                <Card.Content>
+                                    <Card.Header className="text-light">27 ` c</Card.Header>
+                                    <Card.Header className="text-light">Colombo</Card.Header>
+                                    <Card.Meta className={'mt-2'}>
+                                        <span className='text-light date'>Bit Cloudy Night Sky</span>
+                                    </Card.Meta>
+                                    <Card.Description className="text-light">
+                                        Matthew is a musician living in Nashville.
+                                    </Card.Description>
+                                </Card.Content>
+                                <Card.Content extra>
+                                    <a className="text-light">
+                                        <Icon name='user' />
+                                        22 Friends
+                                    </a>
+                                </Card.Content>
+                            </Card>
+                            <AwesomeSlider className={"mt-5 ms-4"} style={{width:"28vw", color:"white"}}>
+                                <div style={{backgroundColor:"transparent"}}>1</div>
+                                <div style={{backgroundColor:"transparent"}}>2</div>
+                                <div style={{backgroundColor:"transparent"}}>3</div>
+                                <div style={{backgroundColor:"transparent"}}>4</div>
+                            </AwesomeSlider>
                         </div>
                     </Grid.Column>
                 </Grid.Row>
