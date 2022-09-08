@@ -5,9 +5,10 @@ class SearchWeather extends Component {
     render() {
         return (
             <div>
-                <Grid.Row columns={1}>
-                    <Grid.Column className={"card"} style={{width:"29vw", marginLeft:"35vw"}}>
-                        <img src="https://wallpaper.dog/large/176458.jpg" width={"200px"} className="card-img" alt="ad" />
+                <Grid.Row columns={1} className={"card"}>
+                    <img src="https://c0.wallpaperflare.com/preview/69/169/132/dark-green-leaf-plant.jpg" style={{height:"99.8vh"}} className="card-img" alt="ad" />
+                    <Grid.Column className={"card-img-overlay"} style={{width:"33vw", marginLeft:"35vw"}}>
+                        <img src="https://images.unsplash.com/photo-1626269555515-2dbfb76d1067?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTl8MTUxMzYxMXx8ZW58MHx8fHw%3D&w=1000&q=80" className="card-img" alt="ad" />
                         <div className="card-img-overlay">
                             <form>
                                 <div className="input-group mb-3">
