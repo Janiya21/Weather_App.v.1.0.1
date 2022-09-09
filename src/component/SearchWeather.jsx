@@ -8,24 +8,32 @@ class SearchWeather extends Component {
         super(props);
 
         this.state = {
-            items : [
-                {
-                    header: 'Project Report - April',
-                    description:
-                        'Leverage agile frameworks to provide a robust synopsis for high level overviews.',
-                    meta: 'ROI: 30%',
-                },
-                {
-                    header: 'Project Report - June',
-                    description:
-                        'Leverage agile frameworks to provide a robust synopsis for high level overviews.',
-                    meta: 'ROI: 30%',
-                }
-            ]
+            key:'b6dffde94f917f6014ea5581e6214679',
+            base:"https://api.openweathermap.org/data/2.5/",
+            mainCityName:"Colombo",
+            mainCityDetails:{}
         }
     }
+
+    componentDidMount() {
+        this.callAPI = this.callAPI.bind(this)
+        this.callAPI();
+    }
+
+    callAPI = (e) => {
+        fetch(`${ this.state.base}weather?q=${this.state.mainCityName}&units=metric&APPID=${ this.state.key}`)
+            .then(res => res.json())
+            .then(result => {
+                this.setState({
+                    mainCityDetails:result
+                })
+                console.log( this.state.mainCityDetails);
+            });
+    }
+
     render() {
-        const {items} = this.state;
+        const tempX = this.state.mainCityDetails;
+        console.log(tempX.main.temp);
         return (
             <div>
                 <Grid.Row columns={1} className={"card"}>
@@ -46,7 +54,7 @@ class SearchWeather extends Component {
                             <Card className={"lead mt-5"} style={{background:"transparent", color:"white", marginLeft:"6.5vw"}}>
                                 <i className={"mt-5 fas fa-cloud-sun fa-4x"}/>
                                 <Card.Content>
-                                    <Card.Header className="text-light">27 ` c</Card.Header>
+                                    <Card.Header className="text-light">22 c</Card.Header>
                                     <Card.Header className="text-light">Colombo</Card.Header>
                                     <Card.Meta className={'mt-2'}>
                                         <span className='text-light date'>Bit Cloudy Night Sky</span>
