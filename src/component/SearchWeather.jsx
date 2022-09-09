@@ -32,8 +32,6 @@ class SearchWeather extends Component {
     }
 
     render() {
-        const tempX = this.state.mainCityDetails;
-        console.log(tempX.main.temp);
         return (
             <div>
                 <Grid.Row columns={1} className={"card"}>

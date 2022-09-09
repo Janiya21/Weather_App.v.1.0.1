@@ -1,5 +1,4 @@
 import './App.css';
-import SearchWeather from "./component/SearchWeather";
 import Sw from "./component/WeatherFinder";
 
 function App() {

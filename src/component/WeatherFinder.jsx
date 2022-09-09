@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card, Grid, Icon} from "semantic-ui-react";
 import AwesomeSlider from "react-awesome-slider";
+import 'react-awesome-slider/dist/styles.css';
 
 const api = {
     key:'f3c75c6d28f658ee32629ebc41a4820b',
@@ -8,14 +9,18 @@ const api = {
 }
 
 function WeatherFinder() {
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useState('Colombo');
     const [weather, setWeather] = useState({});
+    const [city1, setCityWeather1] = useState({});
+    const [city2, setCityWeather2] = useState({});
+    const [city3, setCityWeather3] = useState({});
 
     const search = evt => {
         if (evt.key === "Enter") {
             fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
                 .then(res => res.json())
                 .then(result => {
+                    console.log(result)
                     setWeather(result);
                     setQuery('');
                     console.log(result);
@@ -23,20 +28,32 @@ function WeatherFinder() {
         }
     }
 
-    const dateBuilder = (d) => {
-        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-        let day = days[d.getDay()];
-        let date = d.getDate();
-        let month = months[d.getMonth()];
-        let year = d.getFullYear();
-
-        return `${day} ${date} ${month} ${year}`
+    const setCityDetails1 = (city,name) => {
+        fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                if(name==="city1"){
+                    setCityWeather1(result);
+                }
+                if(name==="city2"){
+                    setCityWeather2(result);
+                }
+                if(name==="city3"){
+                    setCityWeather3(result);
+                }
+                console.log(result);
+            });
     }
 
+    useEffect(() => {
+        setCityDetails1('London','city1');
+        setCityDetails1('Helsinki','city2');
+        setCityDetails1('Mumbai','city3');
+    }, []);
+
     return (
-        <div>
+        <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'app warm' : 'app') : 'app'}>
             <Grid.Row columns={1} className={"card"}>
                 <img src="https://c0.wallpaperflare.com/preview/69/169/132/dark-green-leaf-plant.jpg" style={{height:"99.8vh"}} className="card-img" alt="ad" />
                 <Grid.Column className={"card-img-overlay"} style={{width:"33vw", marginLeft:"35vw"}}>
@@ -51,52 +68,55 @@ function WeatherFinder() {
                                 <i className={"fas fa-search"}/>
                             </button>
                         </div>
-                        <Card className={"lead mt-5"} style={{background:"transparent", color:"white", marginLeft:"6.5vw"}}>
-                            <i className={"mt-5 fas fa-cloud-sun fa-4x"}/>
-                            <Card.Content>
-                                <Card.Header className="text-light">{weather.main.temp} °c</Card.Header>
-                                <Card.Header className="text-light">{weather.name} {weather.sys.country}</Card.Header>
-                                <Card.Meta className={'mt-2'}>
-                                    <span className='text-light date'>{weather.weather[0].description}</span>
-                                </Card.Meta>
-                                <Card.Description className="text-light">
-                                    Temp Min : {weather.main.temp_min} °c ||  Temp Max : {weather.main.temp_max} °c
-                                </Card.Description>
-                            </Card.Content>
-                            <Card.Content extra>
-                                <a className="text-light">
-                                    <Icon name='cloud' />
-                                    22 Friends
-                                </a>
-                            </Card.Content>
-                        </Card>
-                        <AwesomeSlider className={"mt-5 ms-4"} style={{width:"28vw"}}>
+                        {(typeof weather.main != "undefined") ? (
+                            <Card className={"lead mt-5"} style={{background:"transparent", color:"white", marginLeft:"6.5vw"}}>
+                                <i className={"mt-4 fas fa-cloud-sun fa-4x"}/>
+                                <Card.Content>
+                                    <Card.Header className="text-light">{weather.main.temp} °c</Card.Header>
+                                    <Card.Header className="text-light">{weather.name} {weather.sys.country}</Card.Header>
+                                    <Card.Meta className={'mt-2'}>
+                                        <span className='text-light date'>{weather.weather[0].description}</span>
+                                    </Card.Meta>
+                                    <Card.Description className="text-light">
+                                        Min : {weather.main.temp_min} °c ||  Max : {weather.main.temp_max} °c
+                                    </Card.Description>
+                                </Card.Content>
+                                <Card.Content extra className={'mb-2'}>
+                                    <a className="text-light">
+                                        <Icon name='cloud' />
+                                        {weather.clouds.all} Clouds
+                                    </a>
+                                </Card.Content>
+                            </Card>
+                        ) : ('Hello')}
+
+                        <AwesomeSlider className={"mt-2 ms-4"} style={{width:"28vw"}}>
                             <div style={{backgroundColor:"transparent"}}>
                                 <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
-                                    <Card.Content header='London City' />
-                                    <i className={"mt-2 fas fa-cloud-sun-rain fa-4x"}/>
-                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">27 ` c</Card.Header>
+                                    <Card.Content className="mt-1 mb-1 fs-3 fw-bolder text-dark"> {city1.name}</Card.Content>
+                                    <i className={"mb-3 fas fa-cloud-sun-rain fa-4x"}/>
+                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">{city1.main.temp} °c</Card.Header>
                                 </Card>
                             </div>
                             <div style={{backgroundColor:"transparent"}}>
                                 <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
-                                    <Card.Content header='London City' />
-                                    <i className={"mt-2 fas fa-cloud-sun-rain fa-4x"}/>
-                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">27 ` c</Card.Header>
+                                    <Card.Content className="mt-1 mb-1 fs-3 fw-bolder text-dark"> {city2.name}</Card.Content>
+                                    <i className={"mb-3 fas fa-cloud-sun-rain fa-4x"}/>
+                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">{city2.main.temp} °c</Card.Header>
                                 </Card>
                             </div>
                             <div style={{backgroundColor:"transparent"}}>
                                 <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
-                                    <Card.Content header='London City' />
-                                    <i className={"mt-2 fas fa-cloud-sun-rain fa-4x"}/>
-                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">27 ` c</Card.Header>
+                                    <Card.Content className="mt-1 mb-1 fs-3 fw-bolder text-dark"> {city3.name}</Card.Content>
+                                    <i className={"mb-3 fas fa-cloud-sun-rain fa-4x"}/>
+                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">{city3.main.temp} °c</Card.Header>
                                 </Card>
                             </div>
                             <div style={{backgroundColor:"transparent"}}>
                                 <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
-                                    <Card.Content header='London City' />
-                                    <i className={"mt-2 fas fa-cloud-sun-rain fa-4x"}/>
-                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">27 ` c</Card.Header>
+                                    <Card.Content className="mt-1 mb-1 fs-3 fw-bolder text-dark"> {city1.name}</Card.Content>
+                                    <i className={"mb-3 fas fa-cloud-sun-rain fa-4x"}/>
+                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">{city1.main.temp} °c</Card.Header>
                                 </Card>
                             </div>
                         </AwesomeSlider>
