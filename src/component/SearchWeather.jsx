@@ -4,7 +4,28 @@ import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 
 class SearchWeather extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            items : [
+                {
+                    header: 'Project Report - April',
+                    description:
+                        'Leverage agile frameworks to provide a robust synopsis for high level overviews.',
+                    meta: 'ROI: 30%',
+                },
+                {
+                    header: 'Project Report - June',
+                    description:
+                        'Leverage agile frameworks to provide a robust synopsis for high level overviews.',
+                    meta: 'ROI: 30%',
+                }
+            ]
+        }
+    }
     render() {
+        const {items} = this.state;
         return (
             <div>
                 <Grid.Row columns={1} className={"card"}>
@@ -22,7 +43,7 @@ class SearchWeather extends Component {
                                     </button>
                                 </div>
                             </form>
-                            <Card className={"lead"} style={{background:"transparent", color:"white", marginLeft:"6.5vw"}}>
+                            <Card className={"lead mt-5"} style={{background:"transparent", color:"white", marginLeft:"6.5vw"}}>
                                 <i className={"mt-5 fas fa-cloud-sun fa-4x"}/>
                                 <Card.Content>
                                     <Card.Header className="text-light">27 ` c</Card.Header>
@@ -41,11 +62,35 @@ class SearchWeather extends Component {
                                     </a>
                                 </Card.Content>
                             </Card>
-                            <AwesomeSlider className={"mt-5 ms-4"} style={{width:"28vw", color:"white"}}>
-                                <div style={{backgroundColor:"transparent"}}>1</div>
-                                <div style={{backgroundColor:"transparent"}}>2</div>
-                                <div style={{backgroundColor:"transparent"}}>3</div>
-                                <div style={{backgroundColor:"transparent"}}>4</div>
+                            <AwesomeSlider className={"mt-5 ms-4"} style={{width:"28vw"}}>
+                                <div style={{backgroundColor:"transparent"}}>
+                                    <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
+                                        <Card.Content header='London City' />
+                                        <i className={"mt-2 fas fa-cloud-sun-rain fa-4x"}/>
+                                        <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">27 ` c</Card.Header>
+                                    </Card>
+                                </div>
+                                <div style={{backgroundColor:"transparent"}}>
+                                    <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
+                                        <Card.Content header='London City' />
+                                        <i className={"mt-2 fas fa-cloud-sun-rain fa-4x"}/>
+                                        <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">27 ` c</Card.Header>
+                                    </Card>
+                                </div>
+                                <div style={{backgroundColor:"transparent"}}>
+                                    <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
+                                        <Card.Content header='London City' />
+                                        <i className={"mt-2 fas fa-cloud-sun-rain fa-4x"}/>
+                                        <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">27 ` c</Card.Header>
+                                    </Card>
+                                </div>
+                                <div style={{backgroundColor:"transparent"}}>
+                                    <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
+                                        <Card.Content header='London City' />
+                                        <i className={"mt-2 fas fa-cloud-sun-rain fa-4x"}/>
+                                        <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">27 ` c</Card.Header>
+                                    </Card>
+                                </div>
                             </AwesomeSlider>
                         </div>
                     </Grid.Column>
