@@ -11,9 +11,9 @@ const api = {
 function WeatherFinder() {
     const [query, setQuery] = useState('Colombo');
     const [weather, setWeather] = useState({});
-    const [city1, setCityWeather1] = useState({});
-    const [city2, setCityWeather2] = useState({});
-    const [city3, setCityWeather3] = useState({});
+    const [city1, setCityWeather1] = useState({main: {temp:"Loading"}});
+    const [city2, setCityWeather2] = useState({main: {temp:"Loading"}});
+    const [city3, setCityWeather3] = useState({main: {temp:"Loading"}});
 
     const search = evt => {
         if (evt.key === "Enter") {
@@ -53,9 +53,9 @@ function WeatherFinder() {
     }, []);
 
     return (
-        <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'app warm' : 'app') : 'app'}>
+        <div className={(typeof weather.main != "undefined") ? ( (weather.main.temp > 16) ? 'app warm' : 'app') : 'app'}>
             <Grid.Row columns={1} className={"card"}>
-                <img src="https://c0.wallpaperflare.com/preview/69/169/132/dark-green-leaf-plant.jpg" style={{height:"99.8vh"}} className="card-img" alt="ad" />
+                <img src="https://c0.wallpaperflare.com/preview/69/169/132/dark-green-leaf-plant.jpg" style={{maxHeight:"99.7vh"}} className="card-img" alt="ad" />
                 <Grid.Column className={"card-img-overlay"} style={{width:"33vw", marginLeft:"35vw"}}>
                     <img src="https://images.unsplash.com/photo-1626269555515-2dbfb76d1067?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTl8MTUxMzYxMXx8ZW58MHx8fHw%3D&w=1000&q=80" className="card-img" alt="ad" />
                     <div className="card-img-overlay">
@@ -88,14 +88,16 @@ function WeatherFinder() {
                                     </a>
                                 </Card.Content>
                             </Card>
-                        ) : ('Hello')}
+                        ) : ('Fetching')}
 
                         <AwesomeSlider className={"mt-2 ms-4"} style={{width:"28vw"}}>
                             <div style={{backgroundColor:"transparent"}}>
                                 <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
                                     <Card.Content className="mt-1 mb-1 fs-3 fw-bolder text-dark"> {city1.name}</Card.Content>
                                     <i className={"mb-3 fas fa-cloud-sun-rain fa-4x"}/>
-                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">{city1.main.temp} °c</Card.Header>
+                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">
+                                        {city1.main.temp} °c
+                                    </Card.Header>
                                 </Card>
                             </div>
                             <div style={{backgroundColor:"transparent"}}>
