@@ -60,7 +60,7 @@ function WeatherFinder() {
                     <img src="https://images.unsplash.com/photo-1626269555515-2dbfb76d1067?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTl8MTUxMzYxMXx8ZW58MHx8fHw%3D&w=1000&q=80" className="card-img" alt="ad" />
                     <div className="card-img-overlay">
                         <div className="input-group mb-3">
-                            <input type="text" className="form-control" placeholder="Search City Here"
+                            <input type="text" className="form-control" placeholder="Search City Here" style={{opacity:"0.6"}}
                                    aria-label="Recipient's username" aria-describedby="basic-addon2" onKeyPress={search} onChange={e => setQuery(e.target.value)}
                                    value={query}>
                             </input>
@@ -69,22 +69,22 @@ function WeatherFinder() {
                             </button>
                         </div>
                         {(typeof weather.main != "undefined") ? (
-                            <Card className={"lead mt-5"} style={{background:"transparent", color:"white", marginLeft:"6.5vw"}}>
+                            <Card className={"lead mt-5"} style={{background:"transparent", color:"white",width:"23vw", marginLeft:"4.1vw"}}>
                                 <i className={"mt-4 fas fa-cloud-sun fa-4x"}/>
                                 <Card.Content>
-                                    <Card.Header className="text-light">{weather.main.temp} °c</Card.Header>
-                                    <Card.Header className="text-light">{weather.name} {weather.sys.country}</Card.Header>
+                                    <Card.Header className="text-light" style={{fontSize:"1.7em"}}>{weather.main.temp} °c</Card.Header>
+                                    <Card.Header className="text-light mt-2">{weather.name} {weather.sys.country}</Card.Header>
                                     <Card.Meta className={'mt-2'}>
                                         <span className='text-light date'>{weather.weather[0].description}</span>
                                     </Card.Meta>
-                                    <Card.Description className="text-light">
-                                        Min : {weather.main.temp_min} °c ||  Max : {weather.main.temp_max} °c
+                                    <Card.Description className="text-light mt-4">
+                                       <b> Min :</b> {weather.main.temp_min} °c &nbsp;&nbsp;| &nbsp;&nbsp; <b> Max :</b> {weather.main.temp_max} °c
                                     </Card.Description>
                                 </Card.Content>
-                                <Card.Content extra className={'mb-2'}>
-                                    <a className="text-light">
+                                <Card.Content extra style={{marginTop:"-3vh"}} className={'mb-2'}>
+                                    <a className="text-light ">
                                         <Icon name='cloud' />
-                                        {weather.clouds.all} Clouds
+                                        {weather.clouds.all} 
                                     </a>
                                 </Card.Content>
                             </Card>
@@ -93,32 +93,38 @@ function WeatherFinder() {
                         <AwesomeSlider className={"mt-2 ms-4"} style={{width:"28vw"}}>
                             <div style={{backgroundColor:"transparent"}}>
                                 <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
-                                    <Card.Content className="mt-1 mb-1 fs-3 fw-bolder text-dark"> {city1.name}</Card.Content>
-                                    <i className={"mb-3 fas fa-cloud-sun-rain fa-4x"}/>
-                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">
+                                    <Card.Content className="fs-2 fw-bolder text-dark"> {city1.name}</Card.Content>
+                                    <i className={"mb-4 fas fa-cloud-sun-rain fa-4x"}/>
+                                    <Card.Header className="mb-4 fs-3 fw-bolder text-dark">
                                         {city1.main.temp} °c
                                     </Card.Header>
                                 </Card>
                             </div>
                             <div style={{backgroundColor:"transparent"}}>
                                 <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
-                                    <Card.Content className="mt-1 mb-1 fs-3 fw-bolder text-dark"> {city2.name}</Card.Content>
-                                    <i className={"mb-3 fas fa-cloud-sun-rain fa-4x"}/>
-                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">{city2.main.temp} °c</Card.Header>
+                                    <Card.Content className="fs-2 fw-bolder text-dark"> {city2.name}</Card.Content>
+                                    <i className={"mb-4 fas fa-cloud-sun-rain fa-4x"}/>
+                                    <Card.Header className="mb-4 fs-3 fw-bolder text-dark">
+                                        {city2.main.temp} °c
+                                    </Card.Header>
                                 </Card>
                             </div>
                             <div style={{backgroundColor:"transparent"}}>
                                 <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
-                                    <Card.Content className="mt-1 mb-1 fs-3 fw-bolder text-dark"> {city3.name}</Card.Content>
-                                    <i className={"mb-3 fas fa-cloud-sun-rain fa-4x"}/>
-                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">{city3.main.temp} °c</Card.Header>
+                                    <Card.Content className="fs-2 fw-bolder text-dark"> {city3.name}</Card.Content>
+                                    <i className={"mb-4 fas fa-cloud-sun-rain fa-4x"}/>
+                                    <Card.Header className="mb-4 fs-3 fw-bolder text-dark">
+                                        {city3.main.temp} °c
+                                    </Card.Header>
                                 </Card>
                             </div>
                             <div style={{backgroundColor:"transparent"}}>
                                 <Card style={{backgroundColor:" #cccccc", opacity:"0.5", color:"white"}}>
-                                    <Card.Content className="mt-1 mb-1 fs-3 fw-bolder text-dark"> {city1.name}</Card.Content>
-                                    <i className={"mb-3 fas fa-cloud-sun-rain fa-4x"}/>
-                                    <Card.Header className="mt-1 mb-1 fs-3 fw-bolder text-dark">{city1.main.temp} °c</Card.Header>
+                                    <Card.Content className="fs-2 fw-bolder text-dark"> {city2.name}</Card.Content>
+                                    <i className={"mb-4 fas fa-cloud-sun-rain fa-4x"}/>
+                                    <Card.Header className="mb-4 fs-3 fw-bolder text-dark">
+                                        {city2.main.temp} °c
+                                    </Card.Header>
                                 </Card>
                             </div>
                         </AwesomeSlider>
